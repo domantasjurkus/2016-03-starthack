@@ -33,12 +33,16 @@ def readCodeFromManager(manager):
 
 # Functions that manage generation of codes
 
-# 1-time Manager Codes
-def generateManagerCode():
+# Generate 4 digit code
+def generateCode():
 	num = ""
 	for i in range(4):
 		num += random.choice(['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'])
+	return num
 
+# 1-time Manager Codes
+def generateManagerCode():
+	
 	# To do: store final number in database
 	db.session.add(ManagerCodes(num))
 	db.session.commit()
