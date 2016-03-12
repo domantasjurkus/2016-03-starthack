@@ -1,8 +1,8 @@
 from app import db
 
-class ManagerCode(db.Model):
+class ManagerCodes(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	value = db.Column(db.Integer)
+	value = db.Column(db.String(5), unique=True)
 
 	def __init__(self, value):
 	    self.value = value
