@@ -1,0 +1,83 @@
+/* ===== FONT ===== */
+
+@font-face {
+  font-family: 'Avenir';
+  src: url("../fonts/Avenir.ttc"); /*URL to font*/
+}
+/* ===== GENERAL ===== */
+
+body {
+  background: #fcfcfa;
+  font-family: 'Avenir';
+  color: black;
+}
+
+.normal {
+  padding: 4% 7%;
+}
+
+h1,h2,h3 {
+  font-family: 'Avenir';
+  font-weight: 700;
+}
+
+img {
+  max-width: 100%;
+  margin: 5% 0;
+  align: middle;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== WRAPPER ===== */
+
+.wrapper {
+  background-color: white;
+  margin: 3%;
+}
+
+/* ===== CHART STUFF ====== */
+
+svg {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.chart {
+  margin-bottom: 5%;
+  background-color: white;
+}
+
+/* ===== TITLE ===== */
+
+.title {
+  padding: 10%;
+  padding-bottom: 3%;
+  color: black;
+}
+
+.title h1 {
+  text-shadow: 1px 1px 1px #000;
+  font-size: 5em;
+  text-decoration: underline;
+  /*-moz-text-decoration-color: white;  Code for Firefox */
+  text-decoration-color: white;
+}
+
+.title strong {
+  color: white;
+}
+
+.title medium {
+  font-weight: 600;
+}
+
+/* ===== WIKI IMAGE ===== */
+#wiki {
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
