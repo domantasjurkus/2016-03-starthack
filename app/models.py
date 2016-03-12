@@ -1,7 +1,7 @@
 from app import db
 
 
-class ManagerInformationss(db.Model):
+class ManagerInformationsss(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     desc = db.Column(db.String(140))
@@ -27,27 +27,18 @@ class ManagerInformationss(db.Model):
             "returnCode": self.returnCode}
 
 
-class ReturnedOrderss(db.Model):
-    id = db.Column(db.String(100), primary_key=True)
+class ReturnedOrdersss(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    orderNumber = db.Column(db.String(100))
+    lineNumber = db.Column(db.Integer())
     storeAddress = db.Column(db.String(120))
     storeName = db.Column(db.String(70))
 
-    def __init__(self, orderNumber, storeName, storeAddress):
-        self.id = orderNumber
+    def __init__(self, orderNumber, lineNumber, storeName, storeAddress):
+        self.orderNumber = orderNumber
+        self.lineNumber = lineNumber
         self.storeName = storeName
         self.storeAddress = storeAddress
 
     def __repr__(self):
-        return '<ReturnedItems %s:%s>' % (self.id, self.orderNumber)
-
-'''
-class CustomerCodes(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    value = db.Column(db.String(5), unique=True)
-
-    def __init__(self, value):
-        self.value = value
-
-    def __repr__(self):
-        return '<CustomerCodes %r>' % self.value
-'''
+        return '<ReturnedItems %s:%s>' % (self.orderNumber, self.lineNumber)
