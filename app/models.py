@@ -20,18 +20,22 @@ class ManagerInformationss(db.Model):
 
     def serialize(self):
         return {
-                "id": self.id,
-                "desc": self.desc,
-                "storeName": self.storeName,
-                "storeAddress": self.storeAddress,
-                "returnCode": self.returnCode}
+            "id": self.id,
+            "desc": self.desc,
+            "storeName": self.storeName,
+            "storeAddress": self.storeAddress,
+            "returnCode": self.returnCode}
 
 
-class ReturnedOrders(db.Model):
+class ReturnedOrderss(db.Model):
     id = db.Column(db.String(100), primary_key=True)
+    storeAddress = db.Column(db.String(120))
+    storeName = db.Column(db.String(70))
 
-    def __init__(self, orderId, orderNumber):
+    def __init__(self, orderNumber, storeName, storeAddress):
         self.id = orderNumber
+        self.storeName = storeName
+        self.storeAddress = storeAddress
 
     def __repr__(self):
         return '<ReturnedItems %s:%s>' % (self.id, self.orderNumber)
