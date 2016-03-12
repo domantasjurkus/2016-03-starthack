@@ -1,7 +1,6 @@
 *.py[cod]
+.idea/
 venv/
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+
 credentials.csv
+starthackkey.pem

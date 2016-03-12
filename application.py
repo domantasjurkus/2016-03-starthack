@@ -2,10 +2,13 @@ from flask import Flask, render_template, jsonify
 from codes import generateCode
 from app import db
 from app.models import ManagerCodes, CustomerCodes
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
 from codes import generateManagerCode
+from sms import *
+
 
 
 @app.route('/')
@@ -67,3 +70,15 @@ def show_managers():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    return manager_code
+
+
+@app.route("/receive_sms", methods=['GET', 'POST'])
+def receive_sms():
+    receiveSMS(request)
+
+    # @app.route really wants to return a template
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', threaded=True)
