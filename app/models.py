@@ -1,11 +1,23 @@
 from app import db
 
+
 class ManagerCodes(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	value = db.Column(db.String(5), unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.String(5), unique=True)
 
-	def __init__(self, value):
-	    self.value = value
+    def __init__(self, value):
+        self.value = value
 
-	def __repr__(self):
-	    return '<ManagerCode %r>' % self.value
+    def __repr__(self):
+        return '<ManagerCodes %r>' % self.value
+
+
+class CustomerCodes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.String(5), unique=True)
+
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return '<CustomerCodes %r>' % self.value

@@ -2,6 +2,7 @@ import random
 from app import db
 from app.models import ManagerCodes
 
+
 # Functions that manage generation of codes
 
 # Generate 4 digit code
