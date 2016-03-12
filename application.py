@@ -39,8 +39,8 @@ def add_customer():
 
 @app.route('/return/<customerId>/<managerId>')
 def return_product(customerId, managerId):
-    if len(CustomerCodes.query.filter_by(value=customerId)) == 1 \
-            and len(ManagerCodes.query.filter_by(value=managerId)) == 1:
+    if CustomerCodes.query.filter_by(value=customerId).count() == 1 \
+            and ManagerCodes.query.filter_by(value=managerId).count() == 1:
         # TODO: Call their API
         customer = CustomerCodes.query.filter_by(value=customerId).first()
         manager = ManagerCodes.query.filter_by(value=managerId).first()
@@ -48,9 +48,9 @@ def return_product(customerId, managerId):
         db.session.delete(manager)
         db.session.commit()
         res = add_manager()
-        return res
+        return jsonify({"New Manager Id": res})
     else:
-        return jsonify
+        return jsonify({"Status": False})
 
 
 @app.route('/customers/show')
