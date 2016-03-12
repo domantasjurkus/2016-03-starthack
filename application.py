@@ -53,8 +53,11 @@ def add_manager():
 
 
 
-@app.route('/return/<orderNumber>/<managerId>')
-def return_product(orderNumber, managerId):
+@app.route('/return/', methods=['POST'])
+def return_product():
+    orderNumber = request.form['orderNumber']
+    managerId = request.form['managerCode']
+
     if ReturnedOrders.query.get(orderNumber) is not None:
         return jsonify({"Error": "Already returned this order."})
     r = request.get(BASE_URL + "orders/"+orderNumber)
@@ -88,4 +91,4 @@ def receive_sms():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', threaded=True)
+    app.run(debug=True, host='127.0.0.1', threaded=True)
