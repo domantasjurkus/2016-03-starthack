@@ -1,35 +1,36 @@
-<html>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.cs" crossorigin="anonymous">
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <body>
-    <div style="margin-left:auto;margin-right:auto;width:90%">
-      <div class="jumbotron">
-        <h1>Offline/Online Solution</h1>
-        <h3>By 'Return Null'</h3>
-      </div>
+{% extends 'base.html' %}
 
-      <h4>Protocol</h4>
-      <p>In the unfortunate event that the customer wants to return their
-      purchased item to the vendor, we propose the following protocol:</p>
-      <ul>
-        <li>When the customer places an order he/she receives the item in the mail and possibly a digital receipt of purchase. With this purchase information, the customer receives a unique 'return id'. This id can be used in the event of a return.</li>
-        <li>If the customer wishes to return the product online, existing workflows can remain in place. But the existance of a return key means that the online return portal should also accept this key in order to insure the best user experience. So, just as Airlines allow pre-departure check-ins with either email or booking number, so too should online sales websites support return keys.</li>
-      </ul>
-      If instead the customer wishes to return the product in-store, then the return proecudre will work as follows:
-      <ul>
-        <li>When the customer reaches the desk at the store, they tell the salesperson that they would like to return an item. The salesperon asks if the item was purchased online or in the store. If the item is purchased online, then the salesperson will ask for the return key that came with the product. The salesperson will enter the product return key along with the employee id.</li>
-      </ul>
+{% block content %}
+<div class="row">
+<h1>Offline/Online Solution</h1>
+<a href="/dashboard"><button type="button" class="btn btn-primary btn-lg pull-right">Stock Dashboard</button></a>
+</div>
 
-      <h4>Insincere Users</h4>
-      <p>A customer with unsavory character cannot falsely claim to have returned an item. Any return request must be completed from an authorized employee device. For the same reasons, a customer cannot claim to return the same item mutiple times; the first return will invalidate the return key.</p>
-      <h4>Insincere Employees</h4>
-      <p>An employee with unsavory character cannot falsely return items not purchased, because such a transaction requires purchase information on the central servers.</p>
-      <h4>Ease of Use</h4>
-      <p> When it comes to the physical means and locations of information transfer, there are many options. The easiest from the customer's point of view, is to place a small device at service desks in the store. This doesn't require forethought on the part of the user, but instead allows them to walk in the door armed only with their return key (which should be printed on whatever documents they might think to bring with them). This option doesn't require the user to remember any phone numbers, nor does it require the user to install a local app for a possibly one time use. The downside of this approach is that every branch of the store wishing to support online returns must now stock an extra (albeit small) POS system. </p>
-    </div>
-  </body>
-</html>
+<h3>By 'Return Null'</h3>
+
+
+
+<h4>Protocol</h4>
+<p>In the unfortunate event that the customer wants to return their
+purchased item to the vendor, we propose the following protocol:</p>
+<ul>
+<li>When the customer places an order he/she receives the item in the mail and possibly a digital receipt of purchase. With this purchase information, the customer receives a unique 'return id'. This id can be used in the event of a return.</li>
+<li>If the customer wishes to return the product online, existing workflows can remain in place. But the existance of a return key means that the online return portal should also accept this key in order to insure the best user experience. So, just as Airlines allow pre-departure check-ins with either email or booking number, so too should online sales websites support return keys.</li>
+</ul>
+If instead the customer wishes to return the product in-store, then the return proecudre will work as follows:
+<ul>
+<li>When the customer reaches the desk at the store, they tell the salesperson that they would like to return an item. The salesperon asks if the item was purchased online or in the store. If the item is purchased online, then the salesperson will ask for the return key that came with the product. The salesperson will enter the product return key along with the employee id.</li>
+</ul>
+
+<h4>Insincere Users</h4>
+<p>A customer with unsavory character cannot falsely claim to have returned an item. Any return request must be completed from an authorized employee device. For the same reasons, a customer cannot claim to return the same item mutiple times; the first return will invalidate the return key.</p>
+<h4>Insincere Employees</h4>
+<p>An employee with unsavory character cannot falsely return items not purchased, because such a transaction requires purchase information on the central servers.</p>
+<h4>Ease of Use</h4>
+<p> When it comes to the physical means and locations of information transfer, there are many options. The easiest from the customer's point of view, is to place a small device at service desks in the store. This doesn't require forethought on the part of the user, but instead allows them to walk in the door armed only with their return key (which should be printed on whatever documents they might think to bring with them). This option doesn't require the user to remember any phone numbers, nor does it require the user to install a local app for a possibly one time use. The downside of this approach is that every branch of the store wishing to support online returns must now stock an extra (albeit small) POS system. </p>
+
+{% endblock %}
+
 <!--
   <li>The user indicates they wish to return items from their purchase by either entering their return code
   <li>into a mobile optimized web site</li>

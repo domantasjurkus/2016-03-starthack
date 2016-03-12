@@ -76,3 +76,9 @@ td {
   font-family: Consolas, serif;
   font-size: 12px;
 }
+
+.center-y {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
