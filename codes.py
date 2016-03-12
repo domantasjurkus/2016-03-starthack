@@ -1,5 +1,34 @@
 import random
 
+@app.route('/')
+def index():
+    return "Invalid Action"
+
+@app.route('/customer/add')
+def add_customer(customerId):
+    if not customerId in db:
+        db[customerId] = generateCustomerCode()
+        return db[customerId]
+    else:
+        return False
+
+
+@app.route('/customer/check/<customerId>')
+def check_customer(customerId):
+    pass
+
+
+def readCodeFromManager(manager):
+    '''
+    Code if the manager has a code
+    False otherwise
+    '''
+    if manager in db:
+        return db[manager]
+    else:
+        return False
+
+
 # Functions that manage generation of codes
 
 # 1-time Manager Codes
