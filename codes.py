@@ -1,6 +1,6 @@
 import random
 from app import db
-from app.models import ManagerInformationss
+from app.models import ManagerInformationsss
 
 
 # Functions that manage generation of codes
@@ -8,7 +8,7 @@ from app.models import ManagerInformationss
 def generateUniqueCode():
     while True:
         num = generateCode()
-        if ManagerInformationss.query.filter_by(returnCode=num).count() == 0:
+        if ManagerInformationsss.query.filter_by(returnCode=num).count() == 0:
             return num
 
 
@@ -25,10 +25,10 @@ def generateManagerCode():
     num = generateCode()
 
     # To do: store final number in database
-    db.session.add(ManagerInformationss(num))
+    db.session.add(ManagerInformationsss(num))
     db.session.commit()
 
-    codes = ManagerInformationss.query.all()
+    codes = ManagerInformationsss.query.all()
 
     code_list = []
     for code in codes:
