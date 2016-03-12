@@ -11,10 +11,10 @@ from sms import *
 BASE_URL = ("http://testhorizon.gothiagroup.com/"
             "eCommerceServicesWebApi_ver339/api/v3/")
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def index():
-    print request.data
-    return render_template('index.html')
+
+    return render_template('return_form.html')
 
 
 @app.route('/dashboard')
@@ -28,6 +28,10 @@ def dashboard():
         data_returned=data['returned']
     )
 
+@app.route('/solution')
+def solution():
+
+    return render_template('solution.html')
 
 @app.route('/codes')
 def codes():
