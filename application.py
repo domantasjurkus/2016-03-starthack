@@ -11,6 +11,18 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/dashboard')
+def dashboard():
+
+    data = getTemplateStubs()
+
+    return render_template('dashboard.html',
+        data_taken=data['taken'],
+        data_purchased=data['purchased'],
+        data_returned=data['returned']
+    )
+
+
 @app.route('/codes')
 def codes():
     manager_code = generateManagerCode()

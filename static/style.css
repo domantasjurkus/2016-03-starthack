@@ -1,14 +1,9 @@
-/* ===== FONT ===== */
 
-@font-face {
-  font-family: 'Avenir';
-  src: url("../fonts/Avenir.ttc"); /*URL to font*/
-}
 /* ===== GENERAL ===== */
 
 body {
   background: #fcfcfa;
-  font-family: 'Avenir';
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
   color: black;
 }
 
@@ -16,20 +11,21 @@ body {
   padding: 4% 7%;
 }
 
-h1,h2,h3 {
-  font-family: 'Avenir';
-  font-weight: 700;
+#logo {
+  display: inline;
+  width: 100px;
+  border-radius: 5px;
 }
 
-img {
-  max-width: 100%;
-  margin: 5% 0;
-  align: middle;
+#heading {
+  display:inline;
+  padding-left: 30px;
 }
 
 .center {
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 /* ===== WRAPPER ===== */
@@ -37,6 +33,11 @@ img {
 .wrapper {
   background-color: white;
   margin: 3%;
+}
+
+.jumbotron {
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 /* ===== CHART STUFF ====== */
@@ -67,17 +68,11 @@ svg {
   text-decoration-color: white;
 }
 
-.title strong {
-  color: white;
+tr {
+  height: 40px;
 }
 
-.title medium {
-  font-weight: 600;
-}
-
-/* ===== WIKI IMAGE ===== */
-#wiki {
-  position: absolute;
-  left: 100px;
-  top: 0;
+td {
+  font-family: Consolas, serif;
+  font-size: 12px;
 }
