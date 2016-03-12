@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row center">
+    <h2>Stock Dashboard</h2>
+    <hr/>
+    <br/>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Orders taken out</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Return Code</th>
+                <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_taken %}
+                    <tr>
+                        <td>{{ item.return_code }}</td>
+                        <td>{{ item.desc }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Orders Purchased</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Return Code</th>
+                <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_purchased%}
+                    <tr>
+                        <td>{{ item.return_code }}</td>
+                        <td>{{ item.desc }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Orders Returned</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Return Code</th>
+                <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_returned %}
+                    <tr>
+                        <td>{{ item.return_code }}</td>
+                        <td>{{ item.desc }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
