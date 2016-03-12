@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 from codes import generateUniqueCode
 from app import db
-from app.models import ManagerInformationss, ReturnedOrders
+from app.models import ManagerInformationss, ReturnedOrderss
 
 app = Flask(__name__)
 
@@ -42,7 +42,6 @@ def add_manager():
     storeAddress = request.args.get('storeAddress', '')
     num = generateUniqueCode()
     manager = ManagerInformationss(desc, storeName, storeAddress, num)
-    print(manager)
     db.session.add(manager)
     db.session.commit()
     return num
@@ -51,11 +50,11 @@ def add_manager():
 
 @app.route('/return/<orderNumber>/<managerId>')
 def return_product(orderNumber, managerId):
-    if ReturnedOrders.query.get(orderNumber) is not None:
+    if ReturnedOrderss.query.get(orderNumber) is not None:
         return jsonify({"Error": "Already returned this order."})
-    r = request.get(BASE_URL + "orders/"+orderNumber)
-    if r.status_code is not 200:
-        return jsonify({"Error": "Not a valid order ID"})
+    #r = requests.get(BASE_URL + "orders/"+orderNumber)
+    #if r.status_code is not 200:
+        #return jsonify({"Error": "Not a valid order ID"})
     if ManagerInformationss.query.filter_by(returnCode=managerId).count() != 1:
         return jsonify({"Error": "Manager ID not valid"})
     # TODO: Call their API, the item has been returned
@@ -65,10 +64,15 @@ def return_product(orderNumber, managerId):
     res = generateUniqueCode()  # Not atomic at this point
     manager.returnCode = res
 
-    db.session.add(ReturnedOrder(orderNumber))
+    db.session.add(ReturnedOrderss(orderNumber, manager.storeName, manager.storeAddress))
     db.session.commit()
     return jsonify({"New Manager Id": res})
 
+@app.route('/managers/clear')
+def clear_managers():
+    db.session.query(ManagerInformationss).delete()
+    db.session.commit()
+    return jsonify({"Status": "Good"})
 
 @app.route('/managers/show')
 def show_managers():
@@ -76,6 +80,10 @@ def show_managers():
     print(managers)
     return jsonify({"manager_codes": managers})
 
+@app.route('/returns/addresses')
+def return_addresses():
+    addresses = [(r.storeName, r.storeAddress) for r in ReturnedOrderss.query.all()]
+    return jsonify(addresses)
 
 @app.route("/receive_sms", methods=['GET', 'POST'])
 def receive_sms():
