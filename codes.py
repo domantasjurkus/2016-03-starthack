@@ -1,6 +1,6 @@
 import random
 from app import db
-from app.models import ManagerCodes
+from app.models import ManagerInformation
 
 
 # Functions that manage generation of codes
@@ -17,10 +17,10 @@ def generateManagerCode():
 	num = generateCode()
 
 	# To do: store final number in database
-	db.session.add(ManagerCodes(num))
+	db.session.add(ManagerInformation(num))
 	db.session.commit()
 
-	codes = ManagerCodes.query.all()
+	codes = ManagerInformation.query.all()
 
 	code_list = []
 	for code in codes:

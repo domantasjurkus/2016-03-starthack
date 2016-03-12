@@ -1,14 +1,12 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from codes import generateCode
 from app import db
-from app.models import ManagerCodes, CustomerCodes
-from flask import Flask, render_template, request, jsonify
+from app.models import ManagerInformation, CustomerCodes
 
 app = Flask(__name__)
 
 from codes import generateManagerCode
 from sms import *
-
 
 
 @app.route('/')
@@ -24,10 +22,15 @@ def codes():
 
 @app.route('/managers/add')
 def add_manager():
+    storeName = request.args.get('storeName', '')
+    storeAddress = request.args.get('storeAddress', '')
+    print(storeName)
+    print(storeAddress)
     while True:
         num = generateCode()
-        if ManagerCodes.query.filter_by(value=num).count() == 0:
-            db.session.add(ManagerCodes(num))
+        if ManagerInformation.query.filter_by(value=num).count() == 0:
+            db.session.add(ManagerInformation(storeName, storeAddress, num))
+            db.session.commit()
             return num
 
 
@@ -37,16 +40,17 @@ def add_customer():
         num = generateCode()
         if CustomerCodes.query.filter_by(value=num).count() == 0:
             db.session.add(CustomerCodes(num))
+            db.session.commit()
             return num
 
 
 @app.route('/return/<customerId>/<managerId>')
 def return_product(customerId, managerId):
     if CustomerCodes.query.filter_by(value=customerId).count() == 1 \
-            and ManagerCodes.query.filter_by(value=managerId).count() == 1:
+            and ManagerInformation.query.filter_by(value=managerId).count() == 1:
         # TODO: Call their API
         customer = CustomerCodes.query.filter_by(value=customerId).first()
-        manager = ManagerCodes.query.filter_by(value=managerId).first()
+        manager = ManagerInformation.query.filter_by(value=managerId).first()
         db.session.delete(customer)
         db.session.delete(manager)
         db.session.commit()
@@ -64,9 +68,10 @@ def show_customers():
 
 @app.route('/managers/show')
 def show_managers():
-    managers = [m.value for m in ManagerCodes.query.all()]
+    managers = [str(m) for m in ManagerInformation.query.all()]
     print(managers)
     return jsonify({"manager_codes": managers})
+
 
 @app.route("/receive_sms", methods=['GET', 'POST'])
 def receive_sms():
