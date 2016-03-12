@@ -1,0 +1,90 @@
+{
+  billingCustomer: {
+    isNewCustomer: true,
+    isIdentificationVerified: true,
+    hasMarketingOption: true,
+    registrationDate: 2016-03-12T00:40:52.919Z,
+    classification: string,
+    acquisitionChannel: NotSet,
+    conversationLanguage: NO,
+    loyaltyProgram: {
+      hasCustomerCard: true,
+      customerCardSince: 2016-03-12T00:40:52.920Z
+    },
+    customerNumber: string,
+    identificationNumber: string,
+    socialTitle: Mr,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    mobilePhone: string,
+    birthDate: 2016-03-12T00:40:52.920Z,
+    customerCategory: Unknown,
+    address: {
+      street: string,
+      streetNumber: string,
+      streetNumberAdditional: string,
+      postalCode: string,
+      postalPlace: string,
+      countryCode: NO
+    },
+    bankAccount: {
+      owner: string,
+      bankName: string,
+      bankAccountNumber: string,
+      bankCode: string
+    }
+  },
+  deliveryCustomer: {
+    customerNumber: string,
+    identificationNumber: string,
+    socialTitle: Mr,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    mobilePhone: string,
+    birthDate: 2016-03-12T00:40:52.922Z,
+    customerCategory: Unknown,
+    address: {
+      street: string,
+      streetNumber: string,
+      streetNumberAdditional: string,
+      postalCode: string,
+      postalPlace: string,
+      countryCode: NO
+    },
+    bankAccount: {
+      owner: string,
+      bankName: string,
+      bankAccountNumber: string,
+      bankCode: string
+    }
+  },
+  order: {
+    orderNumber: string,
+    orderDetails: {
+      totalNetAmount: 0,
+      totalGrossAmount: 0,
+      currency: EUR,
+      orderChannelType: Internet,
+      orderDeliveryType: Normal,
+      orderItems: [
+        {
+          code: string,
+          groupId: string,
+          description: string,
+          netUnitPrice: 0,
+          grossUnitPrice: 0,
+          quantity: 0,
+          vatCategory: HighCategory,
+          vatPercent: 0,
+          tax: 0,
+          clientInvoiceNumber: string,
+          lineNumber: 0
+        }
+      ]
+    }
+  }
+}
