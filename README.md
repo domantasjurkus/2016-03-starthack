@@ -3,8 +3,10 @@ Return Null
 
 ### To run locally:
 1. Start the virtual environment: source venv/bin/activate
-2. Start the server: python hello.py
-3. Check it out in a browser at: http://127.0.0.1:5000/
+2. Install all requirements: pip install -r requirements.txt
+3. Start the server: python application.py
+4. Check it out in a browser at: http://127.0.0.1:5000/
+5. Stop the virtual environment: deactivate
 
 ### Pushing to production:
 (TBD)

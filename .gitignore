@@ -1,2 +1,6 @@
 *.py[cod]
 .idea/
+venv/
+
+credentials.csv
+starthackkey.pem
