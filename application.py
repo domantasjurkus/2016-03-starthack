@@ -69,7 +69,7 @@ def return_product(orderNumber, managerId):
     res = generateUniqueCode()  # Not atomic at this point
     manager.returnCode = res
 
-    db.session.add(ReturnedOrder(orderNumber))
+    db.session.add(ReturnedOrders(orderNumber))
     db.session.commit()
     return jsonify({"New Manager Id": res})
 
@@ -88,4 +88,4 @@ def receive_sms():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, debug=True)
+    app.run(host='127.0.0.1', threaded=True)
