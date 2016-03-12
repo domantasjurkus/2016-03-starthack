@@ -68,15 +68,9 @@ def show_managers():
     print(managers)
     return jsonify({"manager_codes": managers})
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    return manager_code
-
-
 @app.route("/receive_sms", methods=['GET', 'POST'])
 def receive_sms():
     receiveSMS(request)
-
     # @app.route really wants to return a template
     return render_template('index.html')
 
