@@ -3,21 +3,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div class="jumbotron" href="/">
-        <div id="header" class="container">
-            <a href="/"><img id="logo" src="{{ url_for('static', filename='logo.png') }}" /></a>
-            <h3 id="heading">Null Return</h3>
-        </div>
+    <div id="header" class="container">
+        <a href="/">
+            <img id="icon" src="{{ url_for('static', filename='logo.png') }}" />
+            <img id="logo" src="{{ url_for('static', filename='nullreturn.png') }}" />
+        </a>
     </div>
 
-    <div class="container">
-        <div class="jumbotron">
+    <nav class="navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
+            <div class="collapse navbar-collapse centerContainer navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="menuItem"><a href="/">Return Item</a></li>
+                    <li class="menuItem"><a href="/solution">Our Solution</a></li>
+                    <li class="menuItem"><a href="/dashboard">Dashboard</a></li>
+                </ul>
+            </div>
+           
+        </div>
+    </nav> 
+
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+            <br>
             {% block content %}{% endblock %}
 
         </div>

@@ -14,7 +14,7 @@ BASE_URL = ("http://testhorizon.gothiagroup.com/"
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('return_form.html')
 
 
 @app.route('/dashboard')
@@ -28,6 +28,10 @@ def dashboard():
         data_returned=data['returned']
     )
 
+@app.route('/solution')
+def solution():
+
+    return render_template('solution.html')
 
 @app.route('/codes')
 def codes():
