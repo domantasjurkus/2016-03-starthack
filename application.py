@@ -87,4 +87,4 @@ def receive_sms():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='127.0.0.1', threaded=True)
