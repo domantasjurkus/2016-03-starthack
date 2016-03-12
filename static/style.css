@@ -5,27 +5,60 @@ body {
   background: #fcfcfa;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
   color: black;
+  background-color: #1E2F43;
 }
 
 .normal {
   padding: 4% 7%;
 }
 
-#logo {
+#icon {
   display: inline;
   width: 100px;
+  border-radius: 5px;
+}
+
+#logo {
+  display: inline;
+  width: 200px;
   border-radius: 5px;
 }
 
 #heading {
   display:inline;
   padding-left: 30px;
+  padding-top: 30px;
+  font-weight: 800;
+  font-size: 72px;
+}
+
+#header {
+  text-align: center;
 }
 
 .center {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.centerContainer {
+  text-align: center;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-default {
+  background-color: #0779B5;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    font-size: 16px;
+}
+
+ul {
+  width: 70%;
+  margin: auto;
 }
 
 /* ===== WRAPPER ===== */

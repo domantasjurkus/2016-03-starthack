@@ -11,10 +11,10 @@ from sms import *
 BASE_URL = ("http://testhorizon.gothiagroup.com/"
             "eCommerceServicesWebApi_ver339/api/v3/")
 
-
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+
+    return render_template('return_form.html')
 
 
 @app.route('/dashboard')
@@ -28,6 +28,10 @@ def dashboard():
         data_returned=data['returned']
     )
 
+@app.route('/solution')
+def solution():
+
+    return render_template('solution.html')
 
 @app.route('/codes')
 def codes():
@@ -74,6 +78,12 @@ def clear_managers():
     db.session.commit()
     return jsonify({"Status": "Good"})
 
+@app.route('/returns/clear')
+def clear_returns():
+    db.session.query(ReturnedOrderss).delete()
+    db.session.commit()
+    return jsonify({"Status": "Good"})
+
 @app.route('/managers/show')
 def show_managers():
     managers = [m.serialize() for m in ManagerInformationss.query.all()]
@@ -92,4 +102,4 @@ def receive_sms():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, debug=True)
+    app.run(host='127.0.0.1', threaded=True)
