@@ -19,26 +19,26 @@ def codes():
     return jsonify({"manager_codes": manager_code})
 
 
-@app.route('/manager/add')
+@app.route('/managers/add')
 def add_manager():
     while True:
         num = generateCode()
-        if len(ManagerCodes.query.filter_by(value=num)) == 0:
+        if ManagerCodes.query.filter_by(value=num).count() == 0:
             db.session.add(ManagerCodes(num))
             return num
 
 
 @app.route('/customers/add')
-def add_customer(customerId):
+def add_customer():
     while True:
         num = generateCode()
-        if len(CustomerCodes.query.filter_by(value=num)) == 0:
+        if CustomerCodes.query.filter_by(value=num).count() == 0:
             db.session.add(CustomerCodes(num))
             return num
 
 
 @app.route('/return/<customerId>/<managerId>')
-def check_customer(customerId, managerId):
+def return_product(customerId, managerId):
     if len(CustomerCodes.query.filter_by(value=customerId)) == 1 \
             and len(ManagerCodes.query.filter_by(value=managerId)) == 1:
         # TODO: Call their API
@@ -52,6 +52,18 @@ def check_customer(customerId, managerId):
     else:
         return jsonify
 
+
+@app.route('/customers/show')
+def show_customers():
+    customers = [c.value for c in CustomerCodes.query.all()]
+    return jsonify({"customer_codes": customers})
+
+
+@app.route('/managers/show')
+def show_managers():
+    managers = [m.value for m in ManagerCodes.query.all()]
+    print(managers)
+    return jsonify({"manager_codes": managers})
 
 if __name__ == '__main__':
     app.run(debug=True)
