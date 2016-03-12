@@ -1,15 +1,17 @@
 import WebSmsComToolkit
+import unirest
+import json
+# -*- coding: iso-8859-1 -*-
 
 ngrok = "http://ddebb152.ngrok.io"
-aws = "http://54.93.76.242:5000/receive_sms"
+aws = "http://54.93.76.242:5000"
 swisscom = "+41794454421"
 
 # Stuff needed to send back an SMS
 username = 'domantas.jurkus@gmail.com'
 password = 'Asdfghjk0'
 gateway_url = 'https://api.websms.com'
-recipient_address_list = [4367612345678L]
-message_text_unicode = "Hello there"
+message_text_unicode = "lalalal"
 max_sms_per_message = 1
 is_test = True
 
@@ -17,27 +19,43 @@ is_test = True
 def receiveSMS(request):
     print "Handling"
 
-    data = request.get_json()
-    print data['recipientAddress']
-    print data['textMessageContent']
-    print type(data)
+    try:
+        data = request.get_json()
+        print
+        print data['recipientAddress']
+        print data['textMessageContent']
+        print type(data)
+    except Exception, e:
+        return
 
-    # Check if the message follows a ['return', return_code, manager_id] format
-    client = WebSmsComToolkit.Client(gateway_url, username, password)
-    client.verbose = True
-    response = client.send("message", max_sms_per_message, is_test)
+    return_message = data['textMessageContent']
 
-    print "-- Response Object --"
-    print "transferId : " + str(response.transferId)
-    print "clientMessageId : " + str(response.clientMessageId)
-    print "statusCode : " + str(response.statusCode)
-    print "statusMessage : " + str(response.statusMessage)
-    print "rawContent : " + str(response.rawContent)
+
+    response = unirest.post(
+        "https://api.websms.com/rest/smsmessaging/text",
+        headers = {
+            "Authorization": "Bearer 1afe0f0a-de6a-4f9f-b77e-ccc7b79c494a",
+            "Host": "api.websms.com",
+            "Content-Type": "application/json"
+        }, params = json.dumps({
+            "messageContent" : "lffl",
+            "recipientAddressList" : [ 41794454421 ]
+        })
+    )
+
+    print return_message
+
+
+    '''print response.code # The HTTP status code
+    print response.headers # The HTTP headers
+    print response.body # The parsed response
+    print response.raw_body # The unparsed response'''
+
 
 def getTemplateStubs():
 
     return {
-        "taken": [
+        "taken" : [
             {
                 "return_code": "lalala",
                 "desc": "Nike Zoom V5 11.5"
