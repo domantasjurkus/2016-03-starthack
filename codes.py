@@ -14,7 +14,8 @@ def generateCode():
 
 # 1-time Manager Codes
 def generateManagerCode():
-	
+	num = generateCode()
+
 	# To do: store final number in database
 	db.session.add(ManagerCodes(num))
 	db.session.commit()
