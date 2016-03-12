@@ -1,4 +1,7 @@
 from flask import Flask, render_template, jsonify
+from app import db
+from app.models import ManagerCode
+
 app = Flask(__name__)
 
 from codes import generateManagerCode
