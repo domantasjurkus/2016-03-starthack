@@ -78,6 +78,7 @@ def return_items():
 
 @app.route('/return/', methods=['POST'])
 def return_product():
+    print request.form
     '''
     Given an order number and a manager code,
     Returns a list of all the line items of the order
@@ -122,13 +123,14 @@ def return_addresses():
 
 @app.route("/receive_sms", methods=['GET', 'POST'])
 def receive_sms():
-    global return_history
-    receiveSMS(request, return_history)
+    receiveSMS(request)
     # @app.route really wants to return a template
     return render_template('base.html')
 
-
-
+@app.route("/test", methods=['GET', 'POST'])
+def test():
+    return "Test route reached"
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', threaded=True)
+    # app.run(debug=True, host='0.0.0.0', threaded=True)
+    app.run(debug=True, host='127.0.0.1', threaded=True)

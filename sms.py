@@ -16,9 +16,8 @@ max_sms_per_message = 1
 is_test = True
 
 
-def receiveSMS(request, return_history):
+def receiveSMS(request):
     print "Handling"
-    print return_history
 
     try:
         data = request.get_json()
@@ -39,14 +38,19 @@ def receiveSMS(request, return_history):
 
         headers = {
             #"X-Auth-Key": "68b675b75693809cf584712f3e9786fac04abb844365f2233ec94b182e4d091a",
-            "Content-Type": "application/json"
+            #"Content-Type": "application/json"
         }
         print "between"
-        response = requests.post("/return/",
+        '''r = requests.post("http://localhost:5000/return/",
             headers=headers,
             files=(('orderNumber', str(array[1]), ('managerCode', str(array[2]))))
+        )'''
+        r = requests.post('http://localhost:5000/return/',
+            headers=headers,
+            data={'orderNumber': str(array[1]), 'managerCode': str(array[2])}
         )
-        print response
+
+        print r
 
 
 
