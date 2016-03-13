@@ -133,6 +133,7 @@ def return_product_sms():
     items_to_return = []
     for json_item in json_items_list:
         items_to_return.append(json_item['code'])
+        print "returning: " + json_item['code']
 
     if orderNumber == "":
         return jsonify({"Error": "Please provide an orderNumber."})
