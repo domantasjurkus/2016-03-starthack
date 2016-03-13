@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script>
+api_key = "AIzaSyDjaN3_MGrxGnO11Jo-0WqNPMc2J3nrt5s"
+function initMap() {
+  var myLatLng = {lat: 47.3686, lng: 8.5392};
+
+  // Create a map object and specify the DOM element for display.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: myLatLng,
+    scrollwheel: false,
+    zoom: 4
+  });
+
+  var geocoder = new google.maps.Geocoder();
+
+
+  // Create a marker and set its position.
+
+  //TODO: Replace this
+  //places = [{"Home": "69 Brown Street, Providence RI"}];
+  var bounds = new google.maps.LatLngBounds();
+  //for(var k=0; k<items.length; k++) {
+  {% for item in data_returned %}
+    geocodeAddress(bounds, { "storeAddress":"{{item.storeAddress}}", "storeName": "{{item.storeName}}" }, geocoder, map);
+  {% endfor %}
+
+  //}
+};
+
+function geocodeAddress(bounds, place, geocoder, resultsMap) {
+  console.log("trying");
+  geocoder.geocode({'address': place.storeAddress}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      console.log("New marker:" + place);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location,
+        title: place.storeName
+      });
+      bounds.extend(marker.getPosition());
+      //resultsMap.fitBounds(bounds);
+      return bounds;
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+initMap()
+</script>
+  <style>
+#map {
+  width:600px;
+  height:400px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 20px;
+}
+  </style>
+  <div id="map"></div>
+  </div>
+
+  <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjaN3_MGrxGnO11Jo-0WqNPMc2J3nrt5s&callback=initMap">
+  </script>
+
+  {% endblock %}
