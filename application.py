@@ -117,6 +117,10 @@ def return_product_sms():
     orderNumber = request.form['orderNumber']
     managerId = request.form['managerCode']
 
+    # Make sure order hasn't already been returned
+    if ReturnedOrdersss.query.filter_by(orderNumber=orderNumber).count() != 0:
+        return jsonify({"Error": "Cannot return an order twice"})
+
     if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
         return jsonify({"Error": "Manager ID not valid"})
 
@@ -181,5 +185,5 @@ def test():
     return "Test route reached"
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
     # app.run(debug=True, host='127.0.0.1', threaded=True)
