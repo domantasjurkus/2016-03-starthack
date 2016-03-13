@@ -117,6 +117,10 @@ def return_product_sms():
     orderNumber = request.form['orderNumber']
     managerId = request.form['managerCode']
 
+    # Make sure order hasn't already been returned
+    if ReturnedOrdersss.query.filter_by(orderNumber=orderNumber).count() != 0:
+        return jsonify({"Error": "Cannot return an order twice"})
+
     if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
         return jsonify({"Error": "Manager ID not valid"})
 
