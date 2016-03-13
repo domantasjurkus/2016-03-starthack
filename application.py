@@ -28,6 +28,13 @@ def dashboard():
         data_returned=data_returned
     )
 
+
+@app.route("/log", methods=['GET'])
+def log():
+    global return_history
+    return render_template('log.html', data=return_history)
+
+
 @app.route('/solution')
 def solution():
     return render_template('solution.html')
@@ -71,6 +78,7 @@ def return_items():
 
 @app.route('/return/', methods=['POST'])
 def return_product():
+    print request.form
     '''
     Given an order number and a manager code,
     Returns a list of all the line items of the order
@@ -157,7 +165,12 @@ def return_addresses():
 def receive_sms():
     receiveSMS(request)
     # @app.route really wants to return a template
-    return render_template('index.html')
+    return render_template('base.html')
+
+@app.route("/test", methods=['GET', 'POST'])
+def test():
+    return "Test route reached"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', threaded=True)
+    # app.run(debug=True, host='127.0.0.1', threaded=True)

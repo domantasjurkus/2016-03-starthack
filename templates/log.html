@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row center">
+    <h2>Return History</h2>
+    <hr/>
+    <br/>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Return Code</th>
+                <th>Product</th>
+                <th>Phone Number</th>
+                <th>Return Status</th>
+                <th>Item Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+{% endblock %}

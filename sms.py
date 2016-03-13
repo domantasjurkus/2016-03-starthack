@@ -1,10 +1,9 @@
-#import WebSmsComToolkit
-#import unirest
-import json
+import requests
+import unicodedata
 
 
 
-ngrok = "http://ddebb152.ngrok.io"
+ngrok = "http://0c8a9301.ngrok.io"
 aws = "http://54.93.76.242:5000"
 swisscom = "+41794454421"
 
@@ -22,35 +21,42 @@ def receiveSMS(request):
 
     try:
         data = request.get_json()
-        print
         print data['recipientAddress']
         print data['textMessageContent']
-        print type(data)
+
+        if data['textMessageContent'] == "":
+            print "Text message content empty - exiting..."
+            return
+
+
+        string = data['textMessageContent'].lower()
+        string = unicodedata.normalize('NFKD', string).encode('ascii','ignore')
+        array = string.split()
+
+        # Try and return the order using the internal API
+        print "Making request to API"
+
+        headers = {
+            #"X-Auth-Key": "68b675b75693809cf584712f3e9786fac04abb844365f2233ec94b182e4d091a",
+            #"Content-Type": "application/json"
+        }
+        print "between"
+        '''r = requests.post("http://localhost:5000/return/",
+            headers=headers,
+            files=(('orderNumber', str(array[1]), ('managerCode', str(array[2]))))
+        )'''
+        r = requests.post('http://localhost:5000/return/',
+            headers=headers,
+            data={'orderNumber': str(array[1]), 'managerCode': str(array[2])}
+        )
+
+        print r
+
+
+
+
     except Exception, e:
         return
-
-    return_message = data['textMessageContent']
-
-
-    response = unirest.post(
-        "https://api.websms.com/rest/smsmessaging/text",
-        headers = {
-            "Authorization": "Bearer 1afe0f0a-de6a-4f9f-b77e-ccc7b79c494a",
-            "Host": "api.websms.com",
-            "Content-Type": "application/json"
-        }, params = json.dumps({
-            "messageContent" : "lffl",
-            "recipientAddressList" : [ 41794454421 ]
-        })
-    )
-
-    print return_message
-
-
-    '''print response.code # The HTTP status code
-    print response.headers # The HTTP headers
-    print response.body # The parsed response
-    print response.raw_body # The unparsed response'''
 
 
 def getTemplateStubs():
