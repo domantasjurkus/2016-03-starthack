@@ -1,0 +1,60 @@
+{
+ "billingCustomer": {
+   "isNewCustomer": true,
+   "isIdentificationVerified": true,
+   "hasMarketingOption": false,
+   "registrationDate": "2016-02-01T00:00:00Z",
+   "classification": "Regular",
+   "acquisitionChannel": "SocialNetwork",
+   "conversationLanguage": "NO",
+   "customerNumber": "CUSTOMER1000",
+   "identificationNumber": "SSN198411090111",
+   "socialTitle": "Miss",
+   "firstName": "Summer",
+   "lastName": "Wu",
+   "email": "santa.claus@northpole.com",
+   "phone": "+3725551234",
+   "mobilePhone": "06669874",
+   "birthDate": "1984-11-09T00:00:00Z",
+   "customerCategory": "Person",
+   "address": {
+     "street": "Ice road",
+     "streetNumber": "55",
+     "streetNumberAdditional": "a",
+     "postalCode": "10088",
+     "postalPlace": "North pole",
+     "countryCode": "NO"
+   },
+   "bankAccount": {
+     "owner": "Santas Wife",
+     "bankName": "Nordic Bank",
+     "bankAccountNumber": "NB0000188645236",
+     "bankCode": "XYZ000ABC"
+   }
+ },
+ "order": {
+   "orderNumber": "1234",
+   "orderDetails": {
+     "totalNetAmount": 550.0,
+     "totalGrossAmount": 720.0,
+     "currency": "NOK",
+     "orderChannelType": "CallCenter",
+     "orderDeliveryType": "Express",
+     "orderItems": [
+       {
+         "code": "xkcd",
+         "groupId": "GROUP14",
+         "description": "Blue Jeans",
+         "netUnitPrice": 100.00,
+         "grossUnitPrice": 132.50,
+         "quantity": 5.0,
+         "vatCategory": "HighCategory",
+         "vatPercent": 32.5,
+         "tax": 32.5,
+         "clientInvoiceNumber": "INVOICE012",
+         "lineNumber": 1
+       }
+     ]
+   }
+ }
+}

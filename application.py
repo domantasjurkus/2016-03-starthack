@@ -11,6 +11,10 @@ from sms import *
 BASE_URL = ("http://testhorizon.gothiagroup.com/"
             "eCommerceServicesWebApi_ver339/api/v3/")
 
+return_history = [
+    ["lakthw", "Medium sized Frying pot", "+37067070841", "Returned", "136 Buchanan st, Glasgow"]
+]
+
 @app.route("/")
 def index():
 
@@ -27,6 +31,13 @@ def dashboard():
         data_purchased=data['purchased'],
         data_returned=data['returned']
     )
+
+
+@app.route("/log", methods=['GET'])
+def log():
+    global return_history
+    return render_template('log.html', data=return_history)
+
 
 @app.route('/solution')
 def solution():
@@ -83,9 +94,13 @@ def show_managers():
 
 @app.route("/receive_sms", methods=['GET', 'POST'])
 def receive_sms():
-    receiveSMS(request)
+    global return_history
+    receiveSMS(request, return_history)
     # @app.route really wants to return a template
-    return render_template('index.html')
+    return render_template('base.html')
+
+
+
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', threaded=True)
+    app.run(debug=True, host='127.0.0.1', threaded=True)
