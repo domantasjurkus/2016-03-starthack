@@ -2,73 +2,52 @@
 
 {% block content %}
 
-<div class="row center">
-    <h2>Stock Dashboard</h2>
-    <hr/>
-    <br/>
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <h4>Orders taken out</h4>
+    <div class="col-md-6">
+        <h4>Partner Stores</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                <th>Return Code</th>
-                <th>Description</th>
+                <th>Store Name</th>
+                <th>Store Address</th>
+                <th>Code</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in data_taken %}
+                {% for store in stores %}
                     <tr>
-                        <td>{{ item.return_code }}</td>
-                        <td>{{ item.desc }}</td>
+                        <td>{{ store.storeName }}</td>
+                        <td>{{ store.storeAddress }}</td>
+                        <td>{{ store.returnCode }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <div class="col-md-4">
-        <h4>Orders Purchased</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                <th>Return Code</th>
-                <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in data_purchased%}
-                    <tr>
-                        <td>{{ item.return_code }}</td>
-                        <td>{{ item.desc }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="col-md-4">
+    <div class="col-md-6">
         <h4>Orders Returned</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                <th>Return Code</th>
-                <th>Description</th>
+                <th>Order #</th>
+                <th>Item Code</th>
+                <th>Store Name</th>
+                <th>Store Address</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in data_returned %}
                     <tr>
-                        <td>{{ item.return_code }}</td>
-                        <td>{{ item.desc }}</td>
+                        <td>{{ item.orderNumber }}</td>
+                        <td>{{ item.itemCode }}</td>
+                        <td>{{ item.storeName }}</td>
+                        <td>{{ item.storeAddress }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
 </div>
 
 {% endblock %}

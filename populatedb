@@ -1,0 +1,7 @@
+Requests to send to populate stores:
+http://127.0.0.1:5000/managers/add?storeName=H%26M&storeAddress=Bahnhofstr.%2087,%208001%20Z%C3%BCrich
+http://127.0.0.1:5000/managers/add?storeName=Esprit Store&storeAddress=Limmatquai 50, 8001 Zürich
+
+Test items that exist:
+1934
+1933
