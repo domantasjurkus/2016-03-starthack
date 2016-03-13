@@ -18,6 +18,15 @@ API_KEY = "2d64db29fea4adbed35825365c334d75640eb92ae38020b640de66b93c952023"
 def index():
     return render_template('return_form.html')
 
+@app.route('/map')
+def map():
+    stores = ManagerInformationsss.query.all()
+    data_returned = ReturnedOrdersss.query.all()
+    return render_template('map.html',
+        stores=stores,
+        data_returned=data_returned
+    )
+
 @app.route('/dashboard')
 def dashboard():
     stores = ManagerInformationsss.query.all()
