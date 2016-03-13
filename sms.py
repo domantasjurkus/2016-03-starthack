@@ -41,19 +41,12 @@ def receiveSMS(request):
             #"Content-Type": "application/json"
         }
         print "between"
-        '''r = requests.post("http://localhost:5000/return/",
-            headers=headers,
-            files=(('orderNumber', str(array[1]), ('managerCode', str(array[2]))))
-        )'''
-        r = requests.post('http://localhost:5000/return/',
+        r = requests.post('http://localhost:5000/return/sms/',
             headers=headers,
             data={'orderNumber': str(array[1]), 'managerCode': str(array[2])}
         )
 
         print r
-
-
-
 
     except Exception, e:
         return
