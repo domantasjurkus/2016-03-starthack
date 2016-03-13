@@ -3,5 +3,5 @@ http://127.0.0.1:5000/managers/add?storeName=H%26M&storeAddress=Bahnhofstr.%2087
 http://127.0.0.1:5000/managers/add?storeName=Esprit Store&storeAddress=Limmatquai 50, 8001 Zürich
 
 Test items that exist:
-1934
+1934 (don't use together with next one in db)
 1933

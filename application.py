@@ -90,9 +90,49 @@ def return_product():
         orderNumber=orderNumber
     )
 
+# Return entire order if on sms
+@app.route('/return/sms/', methods=['POST'])
+def return_product_sms():
+    '''
+    Given an order number and a manager code,
+    Returns a list of all the line items of the order
+    '''    
+    orderNumber = request.form['orderNumber']
+    managerId = request.form['managerCode']
+
+    if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
+        return jsonify({"Error": "Manager ID not valid"})
+
+    r = requests.get(BASE_URL + "/orders/" + orderNumber, headers={'X-Auth-Key': API_KEY})
+    if r.status_code is not 200:
+        return jsonify({"Error": "Not a valid order ID"})
+    
+    # PARSE INFO AND RETURN ALL
+    json_items_list=r.json()["orderDetails"]["orderItems"]
+    items_to_return = []
+    for json_item in json_items_list:
+        items_to_return.append(json_item['code'])
+
+    if orderNumber == "":
+        return jsonify({"Error": "Please provide an orderNumber."})
+    if items_to_return == []:
+        return jsonify({"Error": "Please select at least one item to return."})
+    if managerId == "":
+        return jsonify({"Error": "Please provide a managerCode."})
+    if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
+        return jsonify({"Error": "Manager ID not valid"})
+    manager = ManagerInformationsss.query.filter_by(returnCode=managerId).first()
+    for item in items_to_return:
+        db.session.add(ReturnedOrdersss(orderNumber, item, manager.storeName, manager.storeAddress))
+    res = generateUniqueCode()  # Not atomic at this point
+    manager.returnCode = res
+    db.session.commit()
+    return jsonify({"New Code": res})
+
 @app.route('/managers/clear')
 def clear_managers():
-    db.session.query(ManagerInformationsss).delete()
+    ManagerInformationsss.query.filter(ManagerInformationsss.returnCode == 'pje8').delete()
+    #db.session.query(ManagerInformationsss).delete()
     db.session.commit()
     return jsonify({"Status": "Good"})
 
