@@ -30,6 +30,7 @@ function initMap() {
   //}
 };
 
+
 function geocodeAddress(bounds, place, geocoder, resultsMap) {
   console.log("trying");
   geocoder.geocode({'address': place.storeAddress}, function(results, status) {
@@ -39,6 +40,10 @@ function geocodeAddress(bounds, place, geocoder, resultsMap) {
         map: resultsMap,
         position: results[0].geometry.location,
         title: place.storeName
+      });
+      marker.addListener('click', function() {
+            resultsMap.setZoom(14);
+            resultsMap.setCenter(marker.getPosition());
       });
       bounds.extend(marker.getPosition());
       //resultsMap.fitBounds(bounds);
