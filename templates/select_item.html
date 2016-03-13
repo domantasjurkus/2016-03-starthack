@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="centerContainer">
+	<form action="items/" method="post">
+		<div class="form-group">
+			<label>Select item(s) to return:</label>
+			{% for item in items_list %}
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="items[]" value="{{ item.code }}"> {{ item.code }}: {{ item.description }}
+					</label>
+				</div>
+				<input type="hidden" name="orderNumber" value="{{ orderNumber }}">
+		    {% endfor %}
+		    <input type="hidden" name="managerCode" value="{{ manager_code }}">
+	  </div>
+	  <div class="centerContainer"><button type="submit" class="btn btn-primary">Confirm</button></div>
+	</form>
+</div>
+{% endblock %}

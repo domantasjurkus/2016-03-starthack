@@ -3,7 +3,7 @@ from codes import generateUniqueCode
 from app import db
 from app.models import ManagerInformationsss, ReturnedOrdersss
 import json
-
+import requests
 
 app = Flask(__name__)
 
@@ -16,19 +16,16 @@ API_KEY = "2d64db29fea4adbed35825365c334d75640eb92ae38020b640de66b93c952023"
 
 @app.route("/")
 def index():
-
     return render_template('return_form.html')
-
 
 @app.route('/dashboard')
 def dashboard():
-
-    data = getTemplateStubs()
+    stores = ManagerInformationsss.query.all()
+    data_returned = ReturnedOrdersss.query.all()
 
     return render_template('dashboard.html',
-        data_taken=data['taken'],
-        data_purchased=data['purchased'],
-        data_returned=data['returned']
+        stores=stores,
+        data_returned=data_returned
     )
 
 
@@ -40,52 +37,44 @@ def log():
 
 @app.route('/solution')
 def solution():
-
     return render_template('solution.html')
-
-@app.route('/codes')
-def codes():
-    manager_code = generateManagerCode()
-    return jsonify({"manager_codes": manager_code})
-
 
 @app.route('/managers/add')
 def add_manager():
-    desc = request.args.get('desc', '')
     storeName = request.args.get('storeName', '')
     storeAddress = request.args.get('storeAddress', '')
     num = generateUniqueCode()
-    manager = ManagerInformationsss(desc, storeName, storeAddress, num)
+    manager = ManagerInformationsss(storeName, storeAddress, num)
     db.session.add(manager)
     db.session.commit()
     return num
 
 
-@app.route('/return/items', methods=['POST'])
+@app.route('/return/items/', methods=['POST'])
 def return_items():
     '''
     Given an order number, manager code, and a list of line items,
     adds the given items to the returned database
     '''
     order_number = request.form['orderNumber']
-    item_numbers = request.form['itemNumbers']
+    items = request.form.getlist('items[]')
     manager_code = request.form['managerCode']
     if order_number == "":
         return jsonify({"Error": "Please provide an orderNumber."})
-    if item_numbers == []:
-        return jsonify({"Error": "Please provide itemNumbers."})
+    if items == []:
+        return jsonify({"Error": "Please select at least one item to return."})
     if manager_code == "":
         return jsonify({"Error": "Please provide a managerCode."})
-    if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
+    if ManagerInformationsss.query.filter_by(returnCode=manager_code).count() != 1:
         return jsonify({"Error": "Manager ID not valid"})
-    manager = ManagerInformationsss.query.filter_by(returnCode=manager_code)
-    for item_number in item_numbers:
-        db.session.add(ReturnedOrdersss(order_number, int(item_number), manager.storeName, manager.storeAddress))
+    manager = ManagerInformationsss.query.filter_by(returnCode=manager_code).first()
+    for item in items:
+        db.session.add(ReturnedOrdersss(order_number, item, manager.storeName, manager.storeAddress))
     res = generateUniqueCode()  # Not atomic at this point
     manager.returnCode = res
     db.session.commit()
-    return jsonify({"Status": "Good"})
-
+    return render_template('new_code.html', manager_code=res)
+    
 
 @app.route('/return/', methods=['POST'])
 def return_product():
@@ -99,10 +88,14 @@ def return_product():
     if ManagerInformationsss.query.filter_by(returnCode=managerId).count() != 1:
         return jsonify({"Error": "Manager ID not valid"})
 
-    r = requests.post(ARVATO_BASE + "/orders/" + orderNumber, headers={'X-Auth-Key': API_KEY})
+    r = requests.get(BASE_URL + "/orders/" + orderNumber, headers={'X-Auth-Key': API_KEY})
     if r.status_code is not 200:
         return jsonify({"Error": "Not a valid order ID"})
-    return r.json()["shipments"]["shipmentsItems"]
+    return render_template('select_item.html', 
+        items_list=r.json()["orderDetails"]["orderItems"], 
+        manager_code=managerId, 
+        orderNumber=orderNumber
+    )
 
 @app.route('/managers/clear')
 def clear_managers():
@@ -138,4 +131,4 @@ def receive_sms():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(debug=True, host='0.0.0.0', threaded=True)
