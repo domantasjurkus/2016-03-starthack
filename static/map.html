@@ -20,10 +20,10 @@ function initMap() {
 
   //TODO: Replace this
   places = [{"Home": "69 Brown Street, Providence RI"}];
-  for(int i=0; i< places.length; i++) {
-    geocodeAddress(place, geocoder, map);
+  for(var j=0; i< places.length; j++) {
+    geocodeAddress(places[j], geocoder, map);
   }
-}
+};
 
 function geocodeAddress(place, geocoder, resultsMap) {
   for (var key in addresses) {
