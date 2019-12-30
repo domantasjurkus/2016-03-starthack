@@ -1,5 +1,8 @@
-Return Null
+Null Return
 ====================
+A system for processig product returns via SMS without an active internet connection.
+
+![Interface](/img/splash.png "Interface")  
 
 ### To run locally:
 1. Start the virtual environment: source venv/bin/activate

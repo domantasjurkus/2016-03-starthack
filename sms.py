@@ -17,15 +17,11 @@ is_test = True
 
 
 def receiveSMS(request):
-    print "Handling"
-
     try:
         data = request.get_json()
-        print data['recipientAddress']
-        print data['textMessageContent']
 
         if data['textMessageContent'] == "":
-            print "Text message content empty - exiting..."
+            print("Text message content empty - exiting...")
             return
 
 
@@ -33,22 +29,16 @@ def receiveSMS(request):
         string = unicodedata.normalize('NFKD', string).encode('ascii','ignore')
         array = string.split()
 
-        # Try and return the order using the internal API
-        print "Making request to API"
-
         headers = {
             #"X-Auth-Key": "68b675b75693809cf584712f3e9786fac04abb844365f2233ec94b182e4d091a",
             #"Content-Type": "application/json"
         }
-        print "between"
         r = requests.post('http://localhost:5000/return/sms/',
             headers=headers,
             data={'orderNumber': str(array[1]), 'managerCode': str(array[2])}
         )
 
-        print r
-
-    except Exception, e:
+    except Exception:
         return
 
 

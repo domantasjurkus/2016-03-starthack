@@ -87,7 +87,6 @@ def return_items():
 
 @app.route('/return/', methods=['POST'])
 def return_product():
-    print request.form
     '''
     Given an order number and a manager code,
     Returns a list of all the line items of the order
@@ -133,7 +132,6 @@ def return_product_sms():
     items_to_return = []
     for json_item in json_items_list:
         items_to_return.append(json_item['code'])
-        print "returning: " + json_item['code']
 
     if orderNumber == "":
         return jsonify({"Error": "Please provide an orderNumber."})
@@ -167,7 +165,6 @@ def clear_returns():
 @app.route('/managers/show')
 def show_managers():
     managers = [m.serialize() for m in ManagerInformationsss.query.all()]
-    print(managers)
     return jsonify({"manager_codes": managers})
 
 @app.route('/returns/addresses')
